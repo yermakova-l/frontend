@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 
 export class UserSignupPage extends Component {
-  state = {
-    displayName: "",
-    username: "",
-    password: "",
-    passwordRepeat: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayName: "",
+      username: "",
+      password: "",
+      passwordRepeat: "",
+    };
+  }
+
   onChangeDisplayName = (event) => {
     const value = event.target.value;
     this.setState({ displayName: value });
@@ -31,6 +35,7 @@ export class UserSignupPage extends Component {
       displayName: this.state.displayName,
       password: this.state.password,
     };
+    console.log("props from onClickSignup" + this.props);
     this.props.actions.postSignup(user);
   };
   render() {
@@ -89,10 +94,13 @@ export class UserSignupPage extends Component {
 
 UserSignupPage.defaultProps = {
   actions: {
-    postSignup: () =>
-      new Promise((resolve, reject) => {
+    postSignup: () => {
+      console.log("Default Props actions postSignup");
+      return new Promise((resolve, reject) => {
         resolve({});
-      }),
+      });
+    },
   },
 };
+
 export default UserSignupPage;
